@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="card col-md-6 offset-3 mt-2">
+    <div class="card-header">Add new Customer</div>
+    <div class="card-body">
+      <form [formGroup]="newCustomersformGroup" (ngSubmit)="handleSaveCustomers()">
+        <div class="mb-3">
+          <label class="form-label">Name : </label>
+          <input type="text" formControlName="name" class="form-control">
+          <span class="text-danger"
+                *ngIf="newCustomersformGroup.get('name')?.hasError('minlength')
+                    && newCustomersformGroup.get('name')?.errors">
+              Name is required and must be at least 4 characters long.
+          </span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email : </label>
+          <input type="text" formControlName="email" class="form-control">
+          <span class="text-danger"
+                *ngIf="newCustomersformGroup.get('email')?.hasError('email')
+                    && newCustomersformGroup.get('email')?.errors">
+              Email is Not Valid.
+          </span>
+        </div>
+
+        <button [disabled]="!newCustomersformGroup.valid" class="btn btn-info">
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+  <ng-template #failureOrLoading>
+    <ng-container *ngIf="errorMessage; else loading">
+      <div class="text-danger">
+        {{ errorMessage }}
+      </div>
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="text-primary">
+        Loading ....
+      </div>
+    </ng-template>
+
+  </ng-template>
+
+</div>

@@ -1,0 +1,74 @@
+<div class="container mt-2">
+
+  <div class="row">
+    <div class="col col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Account</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="accountFormGroup" (ngSubmit)="handleSearchAccount()">
+            <div class="input-group">
+              <label class=" input-group-text">Account Id:</label>
+              <input type="text" formControlName="accountId" class="form-control">
+              <button type="submit" class="btn btn-info">
+                Search
+              </button>
+            </div>
+          </form>
+          <div class="mt-3">
+            <ng-container *ngIf="account$ | async as accountDetails ; else failureOrLading  ">
+              <div class="mb-3">
+                <label>Account Id : </label>
+                <label> <strong> {{ accountDetails.accountId }} </strong> </label>
+              </div>
+              <div class="mb-3">
+                <label>balance : </label>
+                <label> <strong> {{ accountDetails.balance | number : "1.2-2" }} </strong> </label>
+              </div>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th> Id</th>
+                  <th> Date</th>
+                  <th> Type</th>
+                  <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let op of accountDetails.operationDTOS ">
+                  <td>{{ op.id }}</td>
+                  <td>{{ op.operationDate | date : "dd-mm-yyyy"}}</td>
+                  <td >{{ op.type }}</td>
+                  <td class="text-end" >{{ op.amount | number : "1.2-2"}}</td>
+                </tr>
+                </tbody>
+              </table>
+              <ul class="nav nav-pills"  >
+                <li *ngFor=" let item of [].constructor(accountDetails.totalePages); let page = index " >
+                  <a [ngClass]="page == currentPage ? 'btn-info' : 'btn-outline-info '" class="btn me-1" (click)="gotoPage(page)">
+                  {{page}}
+                  </a>
+                </li>
+              </ul>
+
+            </ng-container>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      gg
+    </div>
+  </div>
+
+  <ng-template #failureOrLading>
+    <ng-container *ngIf="errorMessage ">
+      <div class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
+    </ng-container>
+  </ng-template>
+
+</div>
