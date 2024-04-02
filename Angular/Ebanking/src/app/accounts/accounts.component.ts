@@ -1,4 +1,4 @@
-cd import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AccountsService} from "../services/accounts.service";
 import {catchError, Observable, throwError} from "rxjs";
@@ -16,6 +16,7 @@ export class AccountsComponent implements OnInit {
   errorMessage!: string;
   currentPage: number = 0;
   pageSize: number = 5;
+  operationFormGroup!: FormGroup;
 
   constructor(private fb: FormBuilder, private accountService: AccountsService) {
   }
@@ -24,6 +25,14 @@ export class AccountsComponent implements OnInit {
     this.accountFormGroup = this.fb.group({
       accountId: this.fb.control('')
     });
+    this.operationFormGroup = this.fb.group({
+      operationType: this.fb.control(''),
+      amount: this.fb.control(0),
+      description: this.fb.control(''),
+      accountDestination: this.fb.control(''),
+    });
+
+
   }
 
   public handleSearchAccount(): void {
@@ -37,5 +46,9 @@ export class AccountsComponent implements OnInit {
   public gotoPage(page: number) {
     this.currentPage = page;
     this.handleSearchAccount();
+  }
+
+  handleAccountOperation() {
+
   }
 }

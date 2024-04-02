@@ -1,5 +1,6 @@
 <div class="container mt-2">
 
+  <!-- Account Section -->
   <div class="row">
     <div class="col col-md-6">
       <div class="card">
@@ -9,7 +10,7 @@
         <div class="card-body">
           <form [formGroup]="accountFormGroup" (ngSubmit)="handleSearchAccount()">
             <div class="input-group">
-              <label class=" input-group-text">Account Id:</label>
+              <label class="input-group-text">Account Id:</label>
               <input type="text" formControlName="accountId" class="form-control">
               <button type="submit" class="btn btn-info">
                 Search
@@ -38,16 +39,17 @@
                 <tbody>
                 <tr *ngFor="let op of accountDetails.operationDTOS ">
                   <td>{{ op.id }}</td>
-                  <td>{{ op.operationDate | date : "dd-mm-yyyy"}}</td>
-                  <td >{{ op.type }}</td>
-                  <td class="text-end" >{{ op.amount | number : "1.2-2"}}</td>
+                  <td>{{ op.operationDate | date : "dd-mm-yyyy" }}</td>
+                  <td>{{ op.type }}</td>
+                  <td class="text-end">{{ op.amount | number : "1.2-2" }}</td>
                 </tr>
                 </tbody>
               </table>
-              <ul class="nav nav-pills"  >
-                <li *ngFor=" let item of [].constructor(accountDetails.totalePages); let page = index " >
-                  <a [ngClass]="page == currentPage ? 'btn-info' : 'btn-outline-info '" class="btn me-1" (click)="gotoPage(page)">
-                  {{page}}
+              <ul class="nav nav-pills">
+                <li *ngFor=" let item of [].constructor(accountDetails.totalePages); let page = index ">
+                  <a [ngClass]="page == currentPage ? 'btn-info' : 'btn-outline-info '" class="btn me-1"
+                     (click)="gotoPage(page)">
+                    {{ page }}
                   </a>
                 </li>
               </ul>
@@ -58,11 +60,57 @@
         </div>
       </div>
     </div>
+    <!-- Operations Section -->
     <div class="col col-md-6">
-      gg
+      <div class="card" *ngIf="account$">
+        <div class="card-header">Operations</div>
+        <div class="card-body">
+          {{operationFormGroup.value | json}}
+          <form [formGroup]="operationFormGroup" method="post" (ngSubmit)="handleAccountOperation()">
+
+            <div class=" form-check form-check-inline mb-3">
+              <label class="form-label">Debit </label>
+              <input type="radio" formControlName="operationType" value="DEBIT" class="form-check-input">
+            </div>
+            <div class="form-check form-check-inline mb-3">
+              <label class="form-label">credit </label>
+              <input type="radio" formControlName="operationType" value="CREDIT" class="form-check-input">
+            </div>
+            <div class="form-check form-check-inline mb-3">
+              <label class="form-label">transfer </label>
+              <input type="radio" formControlName="operationType" value="TRANSFER" class="form-check-input">
+            </div>
+
+
+            <div class="mb-3" *ngIf="operationFormGroup.value.operationType !='transfer'; ">
+              <label class="form-label">Account Description : </label>
+              <input type="text" formControlName="accountDestination" class="form-control">
+              <span class="text-danger">
+              Name is required and must be at least 4 characters long.
+          </span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Amount : </label>
+              <input type="text" formControlName="amount" class="form-control">
+              <span class="text-danger">
+              Name is required and must be at least 4 characters long.
+          </span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Description : </label>
+              <input type="text" formControlName="description" class="form-control">
+              <span class="text-danger">
+              Name is required and must be at least 4 characters long.
+            </span>
+            </div>
+            <button class="btn btn-success">Save</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Failure or Loading Section -->
   <ng-template #failureOrLading>
     <ng-container *ngIf="errorMessage ">
       <div class="alert alert-danger mt-3">
