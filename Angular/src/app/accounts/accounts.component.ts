@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountsService} from "../services/accounts.service";
 import {catchError, Observable, throwError} from "rxjs";
 import {AccountDetails} from "../models/account/account.module";
@@ -26,10 +26,10 @@ export class AccountsComponent implements OnInit {
     });
 
     this.operationFormGroup = this.fb.group({
-      operationType: [''],
-      amount: [0],
-      description: [''],
-      accountDestination: ['']
+      operationType: this.fb.control(""),
+      amount: this.fb.control("", Validators.required),
+      description: this.fb.control(''),
+      accountDestination: this.fb.control("", Validators.required)
     });
 
   }
@@ -56,21 +56,35 @@ export class AccountsComponent implements OnInit {
     let amount: number = this.operationFormGroup.value.amount;
     let description: string = this.operationFormGroup.value.description;
     let accountDestination: string = this.operationFormGroup.value.accountDestination;
-
+    console.log(operationType)
     if (operationType == 'DEBIT') {
       this.accountService.debit(accountId, amount, description).subscribe({
         next: (data) => {
           alert("Debit operation successful");
+          this.handleSearchAccount();
         },
         error: (error) => {
           this.errorMessage = error.message;
           console.error('There was an error!', error);
+
         }
       })
     } else if (operationType == 'CREDIT') {
-      this.accountService.credit(accountId, amount, description)
+      this.accountService.credit(accountId, amount, description).subscribe({
+        next: (data) => {
+          alert("Credit operation successful");
+          this.handleSearchAccount();
+        }, error: (error) => {
+        }
+      })
     } else {
-      this.accountService.transfer(accountId, accountDestination, amount, description)
+      this.accountService.transfer(accountId, accountDestination, amount, description).subscribe({
+        next: (data) => {
+          alert("Transfer operation successful");
+          this.handleSearchAccount();
+        }, error: (error) => {
+        }
+      })
     }
   }
 }

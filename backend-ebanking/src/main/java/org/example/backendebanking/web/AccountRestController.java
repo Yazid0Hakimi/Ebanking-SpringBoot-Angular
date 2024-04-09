@@ -48,9 +48,8 @@ public class AccountRestController {
     public CreditDTO credit(@RequestBody CreditDTO creditDTO) throws AccountNotFoundException, BalanceNotSufficientException {
         accountService.credit(creditDTO.getAccountId(), creditDTO.getAmount(), creditDTO.getDescription());
         return creditDTO;
-
     }
-    @PostMapping("/account/transfere")
+    @PostMapping("/account/transfer")
     public TransferRequestDTO transfere(@RequestBody TransferRequestDTO transferRequestDTO) throws AccountNotFoundException, BalanceNotSufficientException {
         accountService.transfer(transferRequestDTO.getAccountSource(), transferRequestDTO.getAccountDestination(), transferRequestDTO.getAmount());
         return transferRequestDTO;

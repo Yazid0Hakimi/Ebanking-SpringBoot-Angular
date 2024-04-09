@@ -181,7 +181,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountHistoryDTO accountPagesHistory(String accoundId, int page, int size) throws AccountNotFoundException {
         Account account = accountRepository.findById(accoundId).orElseThrow(() -> new AccountNotFoundException("Account not founds"));
-        Page<Operation> operations = operationRepository.findByAccount_Id(accoundId, PageRequest.of(page, size));
+        Page<Operation> operations = operationRepository.findByAccount_IdOrderByOperationDateDesc(accoundId, PageRequest.of(page, size));
         AccountHistoryDTO accountHistoryDTO = new AccountHistoryDTO();
         accountHistoryDTO.setOperationDTOS(operations.getContent().stream().map(operation -> accountMapperImpl.operationToOperationDTO(operation)).collect(Collectors.toList()));
         accountHistoryDTO.setAccountId(account.getId());

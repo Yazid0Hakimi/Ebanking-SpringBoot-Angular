@@ -22,8 +22,6 @@ export class NewCostomerComponent {
     })
   }
 
-
-
   handleSaveCustomers() {
     let customer = this.newCustomersformGroup.value;
     this.customerService.saveCustomer(customer).subscribe({
