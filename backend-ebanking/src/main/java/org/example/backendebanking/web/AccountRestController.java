@@ -40,13 +40,13 @@ public class AccountRestController {
 
     @PostMapping("/account/debit")
     public DebitDTO debit(@RequestBody DebitDTO debitDTO) throws AccountNotFoundException, BalanceNotSufficientException {
-        accountService.debit(debitDTO.getAccount(), debitDTO.getAmount(), debitDTO.getDescription());
+        accountService.debit(debitDTO.getAccountId(), debitDTO.getAmount(), debitDTO.getDescription());
         return debitDTO;
     }
 
     @PostMapping("/account/credit")
     public CreditDTO credit(@RequestBody CreditDTO creditDTO) throws AccountNotFoundException, BalanceNotSufficientException {
-        accountService.credit(creditDTO.getAccount(), creditDTO.getAmount(), creditDTO.getDescription());
+        accountService.credit(creditDTO.getAccountId(), creditDTO.getAmount(), creditDTO.getDescription());
         return creditDTO;
 
     }
