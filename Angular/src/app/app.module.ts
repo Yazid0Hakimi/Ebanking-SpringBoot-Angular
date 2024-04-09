@@ -9,13 +9,15 @@ import {CustomersComponent} from "./customers/customers.component";
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import { NewCostomerComponent } from './new-customer/new-costomer.component';
+import { StandtestComponent } from './standtest/standtest.component';
 @NgModule({
   declarations: [
     AppComponent,
     CustomersComponent,
     AccountsComponent,
     NavbarComponent,
-    NewCostomerComponent
+    NewCostomerComponent,
+    StandtestComponent
   ],
   imports: [
     BrowserModule,
