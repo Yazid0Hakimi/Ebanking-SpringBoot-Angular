@@ -51,7 +51,7 @@ export class AccountsComponent implements OnInit {
   }
 
   handleAccountOperation(): void {
-    let accountId: string = this.operationFormGroup.value.accountId;
+    let accountId: string = this.accountFormGroup.value.accountId;
     let operationType: string = this.operationFormGroup.value.operationType;
     let amount: number = this.operationFormGroup.value.amount;
     let description: string = this.operationFormGroup.value.description;
@@ -64,6 +64,7 @@ export class AccountsComponent implements OnInit {
         },
         error: (error) => {
           this.errorMessage = error.message;
+          console.error('There was an error!', error);
         }
       })
     } else if (operationType == 'CREDIT') {
