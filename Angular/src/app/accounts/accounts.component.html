@@ -61,7 +61,6 @@
       <div class="card" >
         <div class="card-header">Operations</div>
         <div class="card-body">
-          {{ operationFormGroup.value | json }}
           <form [formGroup]="operationFormGroup" method="post" (ngSubmit)="handleAccountOperation()">
             <div class="form-check form-check-inline mb-3">
               <label class="form-label">Debit</label>
