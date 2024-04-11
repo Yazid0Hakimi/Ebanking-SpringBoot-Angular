@@ -34,4 +34,6 @@ public interface AccountService {
     AccountHistoryDTO accountPagesHistory(String accoundId, int page, int size) throws AccountNotFoundException;
 
     List<CustomerDTO> searchCustomers(String keyword);
+
+    List<CustomerAccountsDTO> customerAccounts(Long accountId, int page, int size);
 }

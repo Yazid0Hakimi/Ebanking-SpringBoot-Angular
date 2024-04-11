@@ -1,9 +1,6 @@
 package org.example.backendebanking.mappers;
 
-import org.example.backendebanking.dtos.CurrentAccountDTO;
-import org.example.backendebanking.dtos.CustomerDTO;
-import org.example.backendebanking.dtos.OperationDTO;
-import org.example.backendebanking.dtos.SavingAccountDTO;
+import org.example.backendebanking.dtos.*;
 import org.example.backendebanking.entities.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -71,5 +68,12 @@ public class AccountMapperImpl {
         return operation;
     }
 
+    public CustomerAccountsDTO accountToCustomerAccountsDTO(Account account) {
+        CustomerAccountsDTO customerAccounts = new CustomerAccountsDTO();
+        BeanUtils.copyProperties(account, customerAccounts);
+        customerAccounts.setType(account.getClass().getSimpleName()); // Set type based on class name
+        customerAccounts.setCustomer_id(Long.valueOf(account.getCustomer().getId())); // Set type based on class name
+        return customerAccounts;
+    }
 
 }

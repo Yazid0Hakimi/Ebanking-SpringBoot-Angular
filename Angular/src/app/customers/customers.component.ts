@@ -3,6 +3,7 @@ import {CustomerService} from "../services/customer.service";
 import {catchError, map, Observable, throwError} from "rxjs";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Customer} from "../models/customer/customer.module";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-customers',
@@ -14,7 +15,7 @@ export class CustomersComponent implements OnInit {
   errorMessage!: string;
   searchformGroup: FormGroup | undefined
 
-  constructor(private customerService: CustomerService, private fb: FormBuilder) {
+  constructor(private customerService: CustomerService, private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class CustomersComponent implements OnInit {
       }));
   }
 
-     handleDeleteCustomer(c: Customer) {
+  handleDeleteCustomer(c: Customer) {
     this.customerService.deleteCustomer(c.id).subscribe(
       () => {
         this.custumers$ = this.custumers$.pipe(
@@ -52,7 +53,7 @@ export class CustomersComponent implements OnInit {
       }
     );
   }
-
-
-
+  handleAccountOperations(c: Customer) {
+    this.router.navigateByUrl('customer-accounts/' + c.id)
+  }
 }

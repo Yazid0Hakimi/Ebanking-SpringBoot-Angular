@@ -1,6 +1,7 @@
 package org.example.backendebanking.web;
 
 import lombok.AllArgsConstructor;
+import org.example.backendebanking.dtos.CustomerAccountsDTO;
 import org.example.backendebanking.dtos.CustomerDTO;
 import org.example.backendebanking.entities.Customer;
 import org.example.backendebanking.exception.CustomerNotFoundException;
@@ -22,7 +23,7 @@ public class CustomerRestController {
     }
 
     @GetMapping("/customers/search")
-    public List<CustomerDTO> searchCustomers(@RequestParam(name = "keyword" , defaultValue = "") String keyword) {
+    public List<CustomerDTO> searchCustomers(@RequestParam(name = "keyword", defaultValue = "") String keyword) {
         return accountService.searchCustomers(keyword);
     }
 
@@ -45,5 +46,12 @@ public class CustomerRestController {
     @DeleteMapping("/customer/{customerId}")
     public void deleteCustomer(@PathVariable Long customerId) {
         accountService.deleteCustomer(customerId);
+    }
+
+    @GetMapping("/customers/accounts/{id}")
+    public List<CustomerAccountsDTO> getCustomerAccounts(@PathVariable(name = "id") Long id,
+                                                         @RequestParam(name = "page", defaultValue = "0") int page,
+                                                         @RequestParam(name = "size", defaultValue = "5") int size) throws CustomerNotFoundException {
+        return accountService.customerAccounts(id, page, size);
     }
 }

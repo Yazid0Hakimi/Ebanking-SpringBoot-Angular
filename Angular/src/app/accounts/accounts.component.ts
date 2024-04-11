@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountsService} from "../services/accounts.service";
 import {catchError, Observable, throwError} from "rxjs";
 import {AccountDetails} from "../models/account/account.module";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-accounts',
@@ -16,13 +17,16 @@ export class AccountsComponent implements OnInit {
   currentPage: number = 0;
   pageSize: number = 5;
   operationFormGroup!: FormGroup; // Ensure proper initialization
+  pathAccountId!: string;
 
-  constructor(private fb: FormBuilder, private accountService: AccountsService) {
+  constructor(private fb: FormBuilder, private accountService: AccountsService , private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.pathAccountId = this.route.snapshot.params['id'];
+
     this.accountFormGroup = this.fb.group({
-      accountId: [''] // Initialize with default value
+      accountId: [{ value: this.pathAccountId, disabled: true }]// Initialize with default value
     });
 
     this.operationFormGroup = this.fb.group({
@@ -32,6 +36,7 @@ export class AccountsComponent implements OnInit {
       accountDestination: this.fb.control("", Validators.required)
     });
 
+    this.pathAccountId = this.route.snapshot.params['id'];
   }
 
   handleSearchAccount(): void {
@@ -62,6 +67,7 @@ export class AccountsComponent implements OnInit {
         next: (data) => {
           alert("Debit operation successful");
           this.handleSearchAccount();
+          this.accountFormGroup.reset();
         },
         error: (error) => {
           this.errorMessage = error.message;
@@ -74,6 +80,7 @@ export class AccountsComponent implements OnInit {
         next: (data) => {
           alert("Credit operation successful");
           this.handleSearchAccount();
+          this.accountFormGroup.reset();
         }, error: (error) => {
         }
       })
@@ -82,6 +89,7 @@ export class AccountsComponent implements OnInit {
         next: (data) => {
           alert("Transfer operation successful");
           this.handleSearchAccount();
+          this.accountFormGroup.reset();
         }, error: (error) => {
         }
       })

@@ -198,4 +198,11 @@ public class AccountServiceImpl implements AccountService {
         List<CustomerDTO> customersDTO = customers.stream().map(customer -> accountMapperImpl.customerToCustomerDTO(customer)).collect(Collectors.toList());
         return customersDTO;
     }
+
+    @Override
+    public List<CustomerAccountsDTO> customerAccounts(Long accountId, int page, int size) {
+        Page<Account> operations = accountRepository.findAccountByCustomerId(accountId, PageRequest.of(page, size));
+        List<CustomerAccountsDTO>  customerAccountsDTOS = operations.getContent().stream().map(account -> accountMapperImpl.accountToCustomerAccountsDTO(account)).collect(Collectors.toList());
+        return customerAccountsDTOS;
+    }
 }

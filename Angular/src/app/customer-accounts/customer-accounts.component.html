@@ -1,0 +1,43 @@
+<div class="container mt-2">
+  <ng-container *ngIf="customerAccounts$ | async as listAccount; else failureOrLading">
+    <div class="card">
+      <div class="card-header">Customer accounts</div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Status</th>
+            <th>Balance</th>
+            <th>Type</th>
+            <th>Operation</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let c of listAccount; let i = index">
+            <td>{{ i + 1 }}</td> <!-- Adding 1 to start index from 1 instead of 0 -->
+            <td>{{ c.id }}</td>
+            <td>{{ c.status }}</td>
+            <td>{{ c.balance }}</td>
+            <td>{{ c.type }}</td>
+            <td>
+              <button (click)="handleCustomerAccountOperations(c.id)" class="btn btn-success" >Operations</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #failureOrLading>
+    <ng-container *ngIf="errorMessage; else loading">
+      <div class="text-danger">
+        {{ errorMessage }}
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      Loading .....
+    </ng-template>
+  </ng-template>
+</div>

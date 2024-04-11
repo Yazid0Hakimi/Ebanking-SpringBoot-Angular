@@ -21,6 +21,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Delete</th>
+            <th>Account Operation</th>
           </tr>
           </thead>
           <tbody>
@@ -31,6 +32,11 @@
             <td>
               <button (click)="handleDeleteCustomer(c)" class="btn btn-danger">
                 delete
+              </button>
+            </td>
+            <td>
+              <button (click)="handleAccountOperations(c)" class="btn btn-success">
+                Operations
               </button>
             </td>
           </tr>

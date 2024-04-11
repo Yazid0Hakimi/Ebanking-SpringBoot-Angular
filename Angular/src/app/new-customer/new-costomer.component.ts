@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-new-costomer',
   templateUrl: './new-costomer.component.html',
-  styleUrl: './new-costomer.component.css'
+  styleUrls: ['./new-costomer.component.css']
 })
 export class NewCostomerComponent {
   errorMessage!: string;
@@ -32,7 +32,6 @@ export class NewCostomerComponent {
       },
       error: err => {
         console.log('error')
-
       }
     })
   }
