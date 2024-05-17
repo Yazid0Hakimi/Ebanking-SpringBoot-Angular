@@ -5,9 +5,6 @@ import org.example.backendebanking.exception.AccountNotFoundException;
 import org.example.backendebanking.exception.BalanceNotSufficientException;
 import org.example.backendebanking.exception.CustomerNotFoundException;
 import org.example.backendebanking.mappers.AccountMapperImpl;
-import org.example.backendebanking.usersConfig.entities.AppRole;
-import org.example.backendebanking.usersConfig.entities.AppUser;
-import org.example.backendebanking.usersConfig.service.SecurityAccountService;
 import org.example.backendebanking.services.AccountService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,34 +22,8 @@ public class BackendEbankingApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(SecurityAccountService securityAccountService, AccountService accountService, AccountMapperImpl accountMapperImpl) {
+    CommandLineRunner commandLineRunner(AccountService accountService, AccountMapperImpl accountMapperImpl) {
         return args -> {
-            Stream.of("USER",
-                    "ADMIN",
-                    "MANAGER",
-                    "CUSTOMER_MANAGER",
-                    "PRODUCT_MANAGER"
-            ).forEach(roleName -> {
-                AppRole role = new AppRole();
-                role.setRoleName(roleName);
-                securityAccountService.addNewRole(role);
-            });
-
-            Stream.of("user1",
-                    "user2",
-                    "Admin1",
-                    "Admin2",
-                    "manager1",
-                    "manager2"
-            ).forEach(userName -> {
-                AppUser user = new AppUser();
-                user.setUsername(userName);
-                user.setPassword("1234");
-                user.setRoles(new ArrayList<>());
-
-                securityAccountService.addNewUser(user);
-            });
-
             Stream.of("Ahmed", "Mohamed", "Ali").forEach(cust -> {
                 Customer customer = new Customer();
                 customer.setName(cust);

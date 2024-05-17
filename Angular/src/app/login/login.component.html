@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="p-3">
+    <div class="card">
+      <div class="card-header">Authentication</div>
+      <div class="card-body">
+        <form [formGroup]="loginform" (ngSubmit)="handleLogin()" class="text-center">
+          <div class="form-label mb-3">
+            <label for="username">Username</label>
+            <input type="text" id="username" formControlName="username" class="form-control"/>
+          </div>
+          <div class="form-label mb-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control"/>
+          </div>
+          <button class="btn btn-success">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

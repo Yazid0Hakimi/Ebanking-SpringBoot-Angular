@@ -1,0 +1,36 @@
+bearertoken = eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTcxNTUyNTA2MSwiaWF0IjoxNzE1NTI0NDYxLCJzY29wZSI6IlVTRVIifQ.egIup27R2uPHfi1u8g5-gat5Fb9Tr_iw75VD-9DWjXZkiS1iCkMqCBwF2NktMO6OpgeepoeiWNEvWoYZW2z03A
+
+###
+GET http://localhost:8082/customers
+Accept: application/json
+Authorization: bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTcxNTUyNTA2MSwiaWF0IjoxNzE1NTI0NDYxLCJzY29wZSI6IlVTRVIifQ.egIup27R2uPHfi1u8g5-gat5Fb9Tr_iw75VD-9DWjXZkiS1iCkMqCBwF2NktMO6OpgeepoeiWNEvWoYZW2z03A
+
+
+###
+GET http://localhost:8082/customers
+Accept: application/json
+Authorization: bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTcxNTUyNTA2MSwiaWF0IjoxNzE1NTI0NDYxLCJzY29wZSI6IlVTRVIifQ.egIup27R2uPHfi1u8g5-gat5Fb9Tr_iw75VD-9DWjXZkiS1iCkMqCBwF2NktMO6OpgeepoeiWNEvWoYZW2z03A
+
+###
+
+GET http://localhost:8082/auth/profile
+Authorization: bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTcxNDk0MzIwOCwiaWF0IjoxNzE0OTQyNjA4LCJzY29wZSI6IlVTRVIifQ.JFII6UmSte-gD2nHu2KvEi_rEI9x_1jgzr0UNKCMQ4HOzsOdZj7E6eEa5hPZI18n6uw-58wSFivHNz5dHPUanA
+
+<> 2024-05-05T215736.200.json
+<> 2024-05-05T215726.200.json
+<> 2024-05-05T143209.200.json
+<> 2024-05-05T143113.404.json
+
+### Send POST request with body as parameters
+POST http://localhost:8082/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=1234
+
+### Send POST request with body as parameters
+POST http://localhost:8082/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username = user1 &
+password = 1234
+

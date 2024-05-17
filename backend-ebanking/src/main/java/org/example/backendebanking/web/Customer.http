@@ -1,0 +1,10 @@
+PUT http://localhost:8082/customer/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTUyODA2OSwiaWF0IjoxNzE1NTI3NDY5LCJzY29wZSI6IkFETUlOIFVTRVIifQ.u6peZ-BJTU_W0AN4B4Gu3QHE79muVhYushLGb1JPatSD6HJpE0VZrZB26SmijP_RoogztXaCwTSElrH0_Zqfpg
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "email@.com"
+}

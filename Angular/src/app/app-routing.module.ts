@@ -4,13 +4,24 @@ import {CustomersComponent} from "./customers/customers.component";
 import {AccountsComponent} from "./accounts/accounts.component";
 import {NewCostomerComponent} from "./new-customer/new-costomer.component";
 import {CustomerAccountsComponent} from "./customer-accounts/customer-accounts.component";
+import {LoginComponent} from "./login/login.component";
+import {AdminTemplateComponent} from "./admin-template/admin-template.component";
+import {AuthenticationGuard} from "./guards/authentication.guard";
 
 const routes: Routes = [
-  {path: "customers", component: CustomersComponent},
-  {path: "accounts", component: AccountsComponent},
-  {path: "accounts/:id", component: AccountsComponent},
-  {path: "new-custumer", component: NewCostomerComponent},
-  {path: "customer-accounts/:id", component: CustomerAccountsComponent},
+  {path: "login", component: LoginComponent},
+  {path: "", redirectTo: "/login", pathMatch: "full"},
+  {
+    path: "admin", component: AdminTemplateComponent, canActivate: [AuthenticationGuard],
+    children: [
+      {path: "customers", component: CustomersComponent},
+      {path: "accounts", component: AccountsComponent},
+      {path: "accounts/:id", component: AccountsComponent},
+      {path: "new-custumer", component: NewCostomerComponent},
+      {path: "customer-accounts/:id", component: CustomerAccountsComponent},
+    ]
+  },
+
 ];
 
 @NgModule({
